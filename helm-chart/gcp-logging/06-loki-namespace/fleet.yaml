@@ -1,0 +1,8 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 06-loki-namespace
+  namespace: kube-system
+spec:
+  resources:
+    - namespace.yaml

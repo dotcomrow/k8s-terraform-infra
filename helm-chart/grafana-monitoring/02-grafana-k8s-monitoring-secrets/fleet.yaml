@@ -1,0 +1,6 @@
+defaultNamespace: grafana-monitoring-system
+name: 02-grafana-k8s-monitoring-secrets
+
+dependsOn:
+  - name: 01-grafana-k8s-monitoring-namespace
+    namespace: kube-system

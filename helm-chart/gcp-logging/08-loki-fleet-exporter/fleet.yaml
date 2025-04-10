@@ -1,0 +1,20 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 08-loki-fleet-exporter
+spec:
+  resources:
+    - configmap.yaml
+    - daemonset.yaml
+
+dependsOn:
+  - name: 01-gcp-logging-namespace
+    namespace: kube-system
+  - name: 02-gcp-logging-secrets
+    namespace: gcp-logging-system
+  - name: 03-gcp-logging-config
+    namespace: gcp-logging-system
+  - name: 06-loki-namespace
+    namespace: kube-system
+  - name: 07-loki-deployment
+    namespace: loki-logging

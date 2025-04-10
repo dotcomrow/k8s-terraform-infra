@@ -1,0 +1,9 @@
+# Cluster-scoped bundle must NOT use defaultNamespace or targetNamespace
+defaultNamespace: grafana-monitoring-system
+name: 03-grafana-k8s-monitoring-rbac
+
+dependsOn:
+  - name: 01-grafana-k8s-monitoring-namespace
+    namespace: kube-system
+  - name: 02-grafana-k8s-monitoring-secrets
+    namespace: grafana-monitoring-system

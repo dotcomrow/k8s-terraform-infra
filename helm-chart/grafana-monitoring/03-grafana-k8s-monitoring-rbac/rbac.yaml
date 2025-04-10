@@ -1,0 +1,33 @@
+# fleet/monitoring/grafana-k8s-monitoring-rbac/k8s-monitoring-rbac.yaml
+# (Include ClusterRoles and ClusterRoleBindings exported from your Helm chart or pre-created manually)
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: grafana-k8s-monitoring-logs
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-name: grafana-k8s-monitoring
+    meta.helm.sh/release-namespace: grafana-monitoring-system
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "events"]
+    verbs: ["get", "watch", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-k8s-monitoring-logs
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-name: grafana-k8s-monitoring
+    meta.helm.sh/release-namespace: grafana-monitoring-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: grafana-k8s-monitoring-logs
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: grafana-monitoring-system

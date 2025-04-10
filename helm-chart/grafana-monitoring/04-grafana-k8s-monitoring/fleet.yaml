@@ -1,0 +1,20 @@
+defaultNamespace: grafana-monitoring-system
+name: 04-grafana-k8s-monitoring
+
+dependsOn:
+  - name: 01-grafana-k8s-monitoring-namespace
+    namespace: kube-system
+  - name: 02-grafana-k8s-monitoring-secrets
+    namespace: grafana-monitoring-system
+  - name: 03-grafana-k8s-monitoring-rbac
+    namespace: grafana-monitoring-system
+
+helm:
+  chart: k8s-monitoring
+  repo: https://grafana.github.io/helm-charts
+  version: "2.0.23"
+  releaseName: grafana-k8s-monitoring
+  valuesFrom:
+    - secretKeyRef:
+        name: grafana-k8s-monitoring-values
+        key: values.yaml
