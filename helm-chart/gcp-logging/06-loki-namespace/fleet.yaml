@@ -1,4 +1,9 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 06-loki-namespace
+name: 06-loki-namespace
+targetNamespace: fleet-local
+resources:
+  - namespace.yaml
+
+helm:
+  releaseName: skip-helm
+  skipCRDs: true
+  takeOwnership: true
