@@ -1,4 +1,4 @@
-name: 01-gcp-logging-namespace
-targetNamespace: fleet-local
-resources:
-  - namespace.yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 01-gcp-logging-namespace

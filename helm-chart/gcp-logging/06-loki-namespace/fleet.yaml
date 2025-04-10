@@ -1,4 +1,4 @@
-name: 06-loki-namespace
-targetNamespace: fleet-local
-resources:
-  - namespace.yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 06-loki-namespace
