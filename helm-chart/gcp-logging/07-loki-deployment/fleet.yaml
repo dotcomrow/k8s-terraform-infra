@@ -1,13 +1,11 @@
+# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
+defaultNamespace: kube-system
+name: 07-loki-namespace
 
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: loki-logging
-spec:
-  resources:
-    - configmap.yaml
-    - deployment.yaml
-    - service.yaml
+helm:
+  releaseName: skip-helm
+  skipCRDs: true
+  takeOwnership: true
 
 dependsOn:
   - name: 01-gcp-logging-namespace

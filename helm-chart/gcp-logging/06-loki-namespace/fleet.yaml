@@ -1,7 +1,6 @@
-name: 06-loki-namespace
-targetNamespace: fleet-local
-resources:
-  - namespace.yaml
+# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
+defaultNamespace: kube-system
+name: 01-loki-namespace
 
 helm:
   releaseName: skip-helm
