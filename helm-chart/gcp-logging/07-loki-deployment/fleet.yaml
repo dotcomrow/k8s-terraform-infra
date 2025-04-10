@@ -2,11 +2,6 @@
 defaultNamespace: kube-system
 name: 07-loki-deployment
 
-helm:
-  releaseName: skip-helm
-  skipCRDs: true
-  takeOwnership: true
-
 dependsOn:
   - name: 01-gcp-logging-namespace
     namespace: kube-system
