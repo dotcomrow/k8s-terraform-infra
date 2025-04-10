@@ -1,11 +1,6 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 08-loki-fleet-exporter
-spec:
-  resources:
-    - configmap.yaml
-    - daemonset.yaml
+# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
+defaultNamespace: kube-system
+name: 08-loki-fleet-exporter
 
 dependsOn:
   - name: 01-gcp-logging-namespace
