@@ -1,8 +1,4 @@
-# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
-defaultNamespace: kube-system
 name: 06-loki-namespace
-
-helm:
-  releaseName: skip-helm
-  skipCRDs: true
-  takeOwnership: true
+targetNamespace: fleet-local
+resources:
+  - namespace.yaml
