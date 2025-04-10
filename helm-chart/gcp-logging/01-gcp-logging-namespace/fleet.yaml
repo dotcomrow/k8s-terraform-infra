@@ -1,8 +1,8 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 01-gcp-logging-namespace
-  namespace: kube-system
-spec:
-  resources:
-    - namespace.yaml
+# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
+defaultNamespace: kube-system
+name: 01-gcp-logging-namespace
+
+helm:
+  releaseName: skip-helm
+  skipCRDs: true
+  takeOwnership: true
