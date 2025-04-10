@@ -1,3 +1,8 @@
 # helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
 defaultNamespace: kube-system
 name: 01-grafana-k8s-monitoring-namespace
+
+helm:
+  releaseName: skip-helm
+  skipCRDs: true
+  takeOwnership: true
