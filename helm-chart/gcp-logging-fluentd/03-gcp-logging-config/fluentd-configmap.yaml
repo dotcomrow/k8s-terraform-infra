@@ -15,7 +15,7 @@ data:
       @type google_cloud
       project_id suncoast-systems-infra-0e1b
       use_metadata_service false
-      detect_json true
+      detect_json false
       resource_type global
 
       <buffer>
