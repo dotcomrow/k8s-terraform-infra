@@ -8,14 +8,15 @@ data:
     <source>
       @type dummy
       tag test.gcp
-      dummy {"message":"Hello from Fluentd!","severity":"INFO","logging.googleapis.com/resource":{"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}}
+      dummy {"message":"Hello from Fluentd!","severity":"INFO"}
     </source>
 
     <match test.gcp>
       @type google_cloud
-      project_id "suncoast-systems-infra-0e1b"
-      detect_json true
+      project_id suncoast-systems-infra-0e1b
       use_metadata_service false
+      detect_json true
+      resource_type global
 
       <buffer>
         flush_interval 5s
@@ -25,3 +26,4 @@ data:
     <system>
       log_level debug
     </system>
+
