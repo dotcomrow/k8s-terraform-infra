@@ -12,26 +12,22 @@ data:
       tag kubernetes.*
       read_from_head true
       <parse>
-        @type multi_format
-        <pattern>
-          format json
-          time_key time
-          time_format %Y-%m-%dT%H:%M:%S.%NZ
-        </pattern>
-        <pattern>
-          format none
-        </pattern>
+        @type json
+        time_key time
+        time_type string
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        keep_time_key true
       </parse>
     </source>
 
     <filter kubernetes.**>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        container_name ${record["kubernetes"]["container_name"] rescue "unknown"}
-        namespace_name ${record["kubernetes"]["namespace_name"] rescue "unknown"}
-        pod_name ${record["kubernetes"]["pod_name"] rescue "unknown"}
-      </record>
+      @type parser
+      key_name log
+      reserve_data true
+      remove_key_name_field false
+      <parse>
+        @type json
+      </parse>
     </filter>
 
     <match kubernetes.**>
