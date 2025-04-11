@@ -34,9 +34,6 @@ spec:
               readOnly: true
             - name: fluentd-log
               mountPath: /fluentd/log
-            - name: custom-parsers
-              mountPath: /fluentd/etc/custom-parsers.conf
-              subPath: custom-parsers.conf
       volumes:
         - name: fluentd-config
           configMap:
@@ -49,6 +46,3 @@ spec:
             secretName: gcp-logging-creds
         - name: fluentd-log
           emptyDir: {}
-        - name: custom-parsers
-          configMap:
-            name: fluentd-custom-parsers
