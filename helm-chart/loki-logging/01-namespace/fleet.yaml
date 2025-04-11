@@ -1,7 +1,0 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 01-namespace
-spec:
-  resources:
-    - ./

@@ -2,4 +2,4 @@
 paths:
   - grafana-monitoring/
   - gcp-logging/
-  - loki-logging/
+  - gcp-logging-fluentd/
