@@ -12,31 +12,20 @@ data:
       tag kubernetes.*
       read_from_head true
       <parse>
-        @type regexp
-        expression /^(?<time>[^ ]+)\s+(?<stream>stdout|stderr)\s+(?<flag>[A-Z])\s+(?<log>.*)$/
+        @type json
         time_key time
         time_format %Y-%m-%dT%H:%M:%S.%NZ
+        keep_time_key true
       </parse>
     </source>
 
+    # Strip ANSI color codes (safe)
     <filter kubernetes.**>
       @type record_transformer
       enable_ruby true
       <record>
         log ${record["log"].gsub(/\e\[[0-9;]*m/, '') if record["log"]}
       </record>
-    </filter>
-
-    <filter kubernetes.**>
-      @type parser
-      key_name log
-      reserve_data true
-      remove_key_name_field false
-      <parse>
-        @type json
-        time_key time
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
-      </parse>
     </filter>
 
     <match kubernetes.**>
@@ -54,4 +43,5 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
+
 
