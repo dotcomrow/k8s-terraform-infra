@@ -8,23 +8,20 @@ data:
     <source>
       @type dummy
       tag test.gcp
-      dummy {"log": "Hello from Fluentd!"}
+      dummy {"log":"Hello from Fluentd!"}
     </source>
 
     <match test.gcp>
       @type google_cloud
+      project_id suncoast-systems-infra-0e1b
       detect_json false
       use_metadata_service false
-      project_id "suncoast-systems-infra-0e1b"
-      private_key_path /secrets/key.json
+
       <buffer>
-        flush_mode interval
         flush_interval 5s
-        retry_type exponential_backoff
-        retry_max_times 5
-        chunk_limit_size 2M
-        queue_limit_length 8
       </buffer>
     </match>
 
-
+    <system>
+      log_level debug
+    </system>
