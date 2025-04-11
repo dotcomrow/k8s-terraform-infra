@@ -2,3 +2,4 @@
 paths:
   - grafana-monitoring/
   - gcp-logging/
+  - loki-logging/
