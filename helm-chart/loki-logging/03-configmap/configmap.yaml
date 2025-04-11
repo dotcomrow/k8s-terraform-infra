@@ -13,9 +13,9 @@ data:
       targets = discovery.kubernetes.pods.targets
       rule {
         source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_name"]
-        target_label = "namespace_pod"
-        separator = "/"
-        replacement = "$1/$2"
+        target_label  = "namespace_pod"
+        separator     = "/"
+        replacement   = "$1/$2"
       }
     }
 
@@ -30,11 +30,13 @@ data:
       }
 
       stages = [
-        stage.labels({
-          job       = "kubernetes-pod-logs",
-          namespace = "{{.namespace}}",
-          pod       = "{{.pod}}"
-        })
+        stage.labels {
+          values = {
+            job       = "kubernetes-pod-logs"
+            namespace = "{{.namespace}}"
+            pod       = "{{.pod}}"
+          }
+        }
       ]
     }
 
