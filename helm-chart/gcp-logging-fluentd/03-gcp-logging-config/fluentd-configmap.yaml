@@ -8,7 +8,7 @@ data:
     <source>
       @type tail
       path /var/log/containers/*.log
-      pos_file /var/log/fluentd-containers.log.pos
+      pos_file /fluentd/log/fluentd-containers.log.pos
       time_format %Y-%m-%dT%H:%M:%S
       tag kubernetes.*
       format json
@@ -27,28 +27,30 @@ data:
     <match kubernetes.**>
       @type google_cloud
       detect_json true
-      buffer_type memory
-      buffer_chunk_limit 2M
-      buffer_queue_limit 8
-      flush_interval 5s
-      retry_limit 5
-      json_key /var/secrets/google/key.json
-      project_id suncoast-systems-infra-0e1b
-      resource_type k8s_container
       use_metadata_service false
-      zone us-east1
-      vm_id on-prem
 
-      <resource>
-        @type k8s_container
-        <labels>
-          project_id suncoast-systems-infra-0e1b
-          location us-east1
-          cluster_name suncoast-systems-k8s-cluster
-          namespace_name ${record["kubernetes"]["namespace_name"]}
-          pod_name ${record["kubernetes"]["pod_name"]}
-          container_name ${record["kubernetes"]["container_name"]}
-        </labels>
-      </resource>
+      <auth>
+        json_key /var/secrets/google/key.json
+      </auth>
+
+      <metadata>
+        project_id suncoast-systems-infra-0e1b
+        location us-east1
+        cluster_name suncoast-systems-k8s-cluster
+        namespace_id ${record["kubernetes"]["namespace_name"]}
+        pod_id ${record["kubernetes"]["pod_name"]}
+        container_name ${record["kubernetes"]["container_name"]}
+      </metadata>
+
+      <buffer>
+        flush_mode interval
+        retry_type exponential_backoff
+        @type memory
+        flush_interval 5s
+        retry_max_times 5
+        chunk_limit_size 2M
+        queue_limit_length 8
+      </buffer>
     </match>
+
 

@@ -30,6 +30,8 @@ spec:
             - name: gcp-creds
               mountPath: /var/secrets/google
               readOnly: true
+            - name: fluentd-log
+              mountPath: /fluentd/log
       volumes:
         - name: fluentd-config
           configMap:
@@ -40,3 +42,5 @@ spec:
         - name: gcp-creds
           secret:
             secretName: gcp-logging-creds
+        - name: fluentd-log
+          emptyDir: {}
