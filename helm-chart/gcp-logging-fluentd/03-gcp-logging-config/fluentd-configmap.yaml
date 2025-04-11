@@ -9,17 +9,15 @@ data:
       @type dummy
       tag test.gcp
       <record>
-        severity INFO
-        textPayload Hello from Fluentd!
-        logging.googleapis.com/resource {"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}
+        message Hello from Fluentd!
       </record>
     </source>
 
     <match test.gcp>
       @type google_cloud
-      project_id "suncoast-systems-infra-0e1b"
+      project_id suncoast-systems-infra-0e1b
       use_metadata_service false
-      detect_json false
+      resource_type global
       <buffer>
         flush_interval 5s
       </buffer>
