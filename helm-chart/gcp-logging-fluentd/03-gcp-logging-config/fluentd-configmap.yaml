@@ -8,13 +8,13 @@ data:
     <source>
       @type dummy
       tag test.gcp
-      dummy {"log":"Hello from Fluentd!"}
+      dummy {"message":"Hello from Fluentd!","severity":"INFO","logging.googleapis.com/resource":{"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}}
     </source>
 
     <match test.gcp>
       @type google_cloud
-      project_id suncoast-systems-infra-0e1b
-      detect_json false
+      project_id "suncoast-systems-infra-0e1b"
+      detect_json true
       use_metadata_service false
 
       <buffer>
