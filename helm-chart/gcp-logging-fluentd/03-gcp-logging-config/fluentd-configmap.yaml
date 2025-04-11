@@ -64,10 +64,7 @@ data:
       @type google_cloud
       detect_json true
       use_metadata_service false
-
-      <auth>
-        json_key /var/secrets/google/key.json
-      </auth>
+      google_application_credentials /var/secrets/google/key.json
 
       <buffer>
         flush_mode interval
