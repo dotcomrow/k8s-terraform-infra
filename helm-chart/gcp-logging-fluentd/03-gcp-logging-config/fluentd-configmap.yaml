@@ -7,9 +7,9 @@ data:
   fluent.conf: |
     <source>
       @type tail
-      path /var/log/containers/*.log
-      pos_file /fluentd/log/containers.log.pos
-      tag kubernetes.*
+      path "/var/log/containers/*.log"
+      pos_file "/fluentd/log/containers.log.pos"
+      tag "kubernetes.*"
       read_from_head true
       <parse>
         @type none
@@ -18,10 +18,11 @@ data:
 
     <filter kubernetes.**>
       @type record_transformer
-      enable_ruby true
+      enable_ruby false
       <record>
-        log ${record.has_key?("log") && record["log"] ? record["log"] : record.inspect}
-        severity ${record.has_key?("severity") && record["severity"] ? record["severity"] : "INFO"}
+        # Set fallback static values if fields are missing or unstructured
+        log ${record["log"]}
+        severity INFO
       </record>
     </filter>
 
@@ -29,10 +30,8 @@ data:
       @type google_cloud
       detect_json false
       use_metadata_service false
-      google_application_credentials /var/secrets/google/key.json
-
       <buffer>
-        @type memory
+        flush_mode interval
         flush_interval 5s
         retry_type exponential_backoff
         retry_max_times 5
@@ -40,6 +39,3 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
-
-
-
