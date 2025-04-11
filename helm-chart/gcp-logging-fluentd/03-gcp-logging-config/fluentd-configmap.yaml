@@ -16,13 +16,12 @@ data:
       </parse>
     </source>
 
-    <filter kubernetes.**>
-      @type record_modifier
+    <filter **>
+      @type record_transformer
+      enable_ruby true
       <record>
-        log ${message}
-        severity INFO
+        log ${record["message"] || record["log"] || record.to_s}
       </record>
-      remove_keys message
     </filter>
 
     <match kubernetes.**>
