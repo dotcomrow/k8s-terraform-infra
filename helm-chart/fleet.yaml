@@ -1,4 +1,4 @@
 # helm-chart/fleet.yaml
 paths:
   - grafana-monitoring/
-  # - gcp-logging/
+  - gcp-logging/

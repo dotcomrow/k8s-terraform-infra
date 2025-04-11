@@ -2,8 +2,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: alloy-logs-gcp
-  namespace: gcp-logging-system
+  namespace: loki-logging
   labels:
     app.kubernetes.io/managed-by: Helm
     meta.helm.sh/release-name: gcp-k8s-logging
-    meta.helm.sh/release-namespace: gcp-logging-system
+    meta.helm.sh/release-namespace: loki-logging
