@@ -14,7 +14,7 @@ data:
       format json
     </source>
 
-    <match **>
+    <match kubernetes.**>
       @type google_cloud
       detect_json true
       buffer_type memory
@@ -27,6 +27,6 @@ data:
       project_id suncoast-systems-infra-0e1b
       resource_type k8s_container
       use_metadata_service false
-      zone us-east1            # Or your actual GCP zone
+      zone us-east1         # <-- make sure this is your actual zone
       vm_id on-prem
     </match>
