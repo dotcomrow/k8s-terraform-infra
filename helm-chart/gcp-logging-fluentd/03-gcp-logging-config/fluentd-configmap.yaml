@@ -18,8 +18,9 @@ data:
 
     <filter kubernetes.**>
       @type record_transformer
+      enable_ruby true
       <record>
-        log ${record["log"] || record.to_s}
+        log ${record["log"] ? record["log"] : record.to_s}
       </record>
     </filter>
 
