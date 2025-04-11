@@ -6,26 +6,12 @@ metadata:
 data:
   fluent.conf: |
     <source>
-      @type tail
-      path "/var/log/containers/*.log"
-      pos_file "/fluentd/log/containers.log.pos"
-      tag "kubernetes.*"
-      read_from_head true
-      <parse>
-        @type none
-      </parse>
+      @type dummy
+      tag test.gcp
+      dummy {"log":"Hello from Fluentd! This is a test log.","severity":"INFO"}
     </source>
 
-    <filter kubernetes.**>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        log ${record["log"] || record["message"] || record.to_s}
-        severity ${record["severity"] || "INFO"}
-      </record>
-    </filter>
-
-    <match kubernetes.**>
+    <match test.gcp>
       @type google_cloud
       detect_json false
       use_metadata_service false
@@ -38,5 +24,4 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
-
 
