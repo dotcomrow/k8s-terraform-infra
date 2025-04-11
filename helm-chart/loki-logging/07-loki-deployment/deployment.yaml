@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: loki
+  namespace: loki-logging
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    meta.helm.sh/release-name: loki-logging
+    meta.helm.sh/release-namespace: loki-logging
+spec:
+  serviceName: loki
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loki
+  template:
+    metadata:
+      labels:
+        app: loki
+    spec:
+      containers:
+        - name: loki
+          image: grafana/loki:2.9.3
+          ports:
+            - containerPort: 3100
+          args:
+            - -config.file=/etc/loki/config.yaml
+          volumeMounts:
+            - name: config
+              mountPath: /etc/loki
+            - name: wal
+              mountPath: /wal
+      volumes:
+        - name: wal
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: loki-config

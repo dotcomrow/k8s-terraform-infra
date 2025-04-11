@@ -1,0 +1,7 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 01-gcp-logging-namespace
+spec:
+  resources:
+    - name: namespace.yaml

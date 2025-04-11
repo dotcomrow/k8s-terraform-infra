@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: gcp-logging-system
+data:
+  fluent.conf: |
+    <source>
+      @type tail
+      path /var/log/containers/*.log
+      pos_file /var/log/fluentd-containers.log.pos
+      time_format %Y-%m-%dT%H:%M:%S
+      tag kubernetes.*
+      format json
+    </source>
+
+    <match **>
+      @type google_cloud
+      detect_json true
+      buffer_type memory
+      buffer_chunk_limit 2M
+      buffer_queue_limit 8
+      flush_interval 5s
+      retry_limit 5
+      auth_method json_key
+      json_key /var/secrets/google/key.json
+      project_id YOUR_PROJECT_ID
+      resource_type k8s_container
+      use_metadata_service false
+    </match>
