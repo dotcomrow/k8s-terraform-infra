@@ -12,36 +12,6 @@ data:
       tag kubernetes.*
       read_from_head true
       <parse>
-        @type json
-        time_key time
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
-        keep_time_key true
+        @type none
       </parse>
     </source>
-
-    # Strip ANSI color codes (safe)
-    <filter kubernetes.**>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        log ${record["log"].gsub(/\e\[[0-9;]*m/, '') if record["log"]}
-      </record>
-    </filter>
-
-    <match kubernetes.**>
-      @type google_cloud
-      detect_json true
-      use_metadata_service false
-
-      <buffer>
-        flush_mode interval
-        retry_type exponential_backoff
-        @type memory
-        flush_interval 5s
-        retry_max_times 5
-        chunk_limit_size 2M
-        queue_limit_length 8
-      </buffer>
-    </match>
-
-
