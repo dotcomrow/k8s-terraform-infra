@@ -8,23 +8,18 @@ data:
     <source>
       @type dummy
       tag test.gcp
-      dummy {
-        "severity": "INFO",
-        "textPayload": "Hello from Fluentd!",
-        "logging.googleapis.com/resource": {
-          "type": "global",
-          "labels": {
-            "project_id": "suncoast-systems-infra-0e1b"
-          }
-        }
-      }
+      <record>
+        severity INFO
+        textPayload Hello from Fluentd!
+        logging.googleapis.com/resource {"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}
+      </record>
     </source>
 
     <match test.gcp>
       @type google_cloud
       project_id "suncoast-systems-infra-0e1b"
       use_metadata_service false
-      detect_json true
+      detect_json false
       <buffer>
         flush_interval 5s
       </buffer>
@@ -33,5 +28,4 @@ data:
     <system>
       log_level debug
     </system>
-
 
