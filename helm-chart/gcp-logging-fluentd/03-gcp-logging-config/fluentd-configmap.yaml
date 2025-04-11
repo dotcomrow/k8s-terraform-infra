@@ -11,27 +11,14 @@ data:
       dummy {"log":"Hello from Fluentd!"}
     </source>
 
-    <filter test.gcp>
-      @type record_transformer
-      enable_ruby false
-      <record>
-        severity INFO
-        # Avoid sending logging.googleapis.com/resource directly! Do this instead:
-        resource_type global
-        labels {"env":"test"}
-      </record>
-    </filter>
-
     <match test.gcp>
       @type google_cloud
       detect_json false
       use_metadata_service false
-      project_id suncoast-systems-infra-0e1b
-
-      # These two fields avoid triggering representable bugs
-      resource_type global
-      labels {"env":"test"}
-
+      project_id "suncoast-systems-infra-0e1b"
+      <labels>
+        env test
+      </labels>
       <buffer>
         flush_mode interval
         flush_interval 5s
@@ -41,4 +28,5 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
+
 
