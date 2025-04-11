@@ -18,11 +18,10 @@ data:
 
     <filter kubernetes.**>
       @type record_transformer
-      enable_ruby false
+      enable_ruby true
       <record>
-        # Set fallback static values if fields are missing or unstructured
-        log ${record["log"]}
-        severity INFO
+        log ${record["log"] || record.to_s}
+        severity ${record["severity"] || "INFO"}
       </record>
     </filter>
 
