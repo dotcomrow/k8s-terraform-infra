@@ -28,9 +28,9 @@ data:
         stage.labels(values = {
           job       = "kubernetes-pod-logs",
           namespace = "{{.namespace}}",
-          pod       = "{{.pod}}",
+          pod       = "{{.pod}}"
         }),
-      ],
+      ]
     }
 
     loki.write "local" {
