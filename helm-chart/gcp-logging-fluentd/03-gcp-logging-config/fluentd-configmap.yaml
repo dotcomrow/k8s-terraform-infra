@@ -14,6 +14,16 @@ data:
       format json
     </source>
 
+    <filter kubernetes.**>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        container_name ${record["kubernetes"]["container_name"] rescue "unknown"}
+        namespace_name ${record["kubernetes"]["namespace_name"] rescue "unknown"}
+        pod_name ${record["kubernetes"]["pod_name"] rescue "unknown"}
+      </record>
+    </filter>
+
     <match kubernetes.**>
       @type google_cloud
       detect_json true
