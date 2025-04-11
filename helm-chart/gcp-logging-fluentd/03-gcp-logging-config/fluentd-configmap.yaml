@@ -13,17 +13,9 @@ data:
       read_from_head true
       <parse>
         @type none
+        unmatched_lines
       </parse>
     </source>
-
-    <filter kubernetes.**>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        log ${record["log"] || record.to_s}
-        severity ${record["severity"] || "INFO"}
-      </record>
-    </filter>
 
     <match kubernetes.**>
       @type google_cloud
@@ -38,3 +30,4 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
+
