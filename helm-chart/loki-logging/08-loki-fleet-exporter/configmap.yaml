@@ -16,9 +16,9 @@ data:
     discovery.relabel "pods" {
       targets = discovery.kubernetes.pods.targets
       rule {
-        source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_name"]
-        target_label = "namespace_pod"
-        separator = "/"
+        source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_name"],
+        target_label = "namespace_pod",
+        separator = "/",
         replacement = "$1/$2"
       }
     }
@@ -28,15 +28,15 @@ data:
       forward_to = [loki.write.local.receiver]
 
       labels = {
-        job       = "kubernetes-pod-logs"
-        namespace = "{{.namespace}}"
+        job       = "kubernetes-pod-logs",
+        namespace = "{{.namespace}}",
         pod       = "{{.pod}}"
       }
 
       stages = [
         stage.labels(
-          job       = "kubernetes-pod-logs"
-          namespace = "{{.namespace}}"
+          job       = "kubernetes-pod-logs",
+          namespace = "{{.namespace}}",
           pod       = "{{.pod}}"
         )
       ]
