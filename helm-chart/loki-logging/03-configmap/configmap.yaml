@@ -26,8 +26,8 @@ data:
 
       stage.labels {
         values = {
-          job       = "kubernetes-pod-logs"
-          namespace = "{{.namespace}}"
+          job       = "kubernetes-pod-logs",
+          namespace = "{{.namespace}}",
           pod       = "{{.pod}}"
         }
       }
