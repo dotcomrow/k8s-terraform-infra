@@ -32,7 +32,6 @@ data:
       buffer_queue_limit 8
       flush_interval 5s
       retry_limit 5
-      auth_method json_key
       json_key /var/secrets/google/key.json
       project_id suncoast-systems-infra-0e1b
       resource_type k8s_container
