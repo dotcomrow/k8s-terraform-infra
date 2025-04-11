@@ -1,9 +1,0 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 02-gcp-logging-secret
-spec:
-  dependsOn:
-    - name: 01-gcp-logging-namespace
-  resources:
-    - name: gcp-logging-creds.yaml

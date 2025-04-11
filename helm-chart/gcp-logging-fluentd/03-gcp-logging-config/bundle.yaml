@@ -1,9 +1,0 @@
-apiVersion: fleet.cattle.io/v1alpha1
-kind: Bundle
-metadata:
-  name: 03-gcp-logging-config
-spec:
-  dependsOn:
-    - name: 01-gcp-logging-namespace
-  resources:
-    - name: fluentd-configmap.yaml
