@@ -30,7 +30,7 @@ data:
           namespace = "{{.namespace}}",
           pod       = "{{.pod}}",
         }),
-      ]
+      ],
     }
 
     loki.write "local" {
