@@ -17,7 +17,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: fluentd
-          image: ghcr.io/boxyhq/fluentd-gcp:latest
+          image: gcr.io/google-containers/fluentd-gcp:3.2.0
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
