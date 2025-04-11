@@ -1,6 +1,0 @@
-defaultNamespace: gcp-logging-system
-name: 02-gcp-logging-secrets
-
-dependsOn:
-  - name: 01-gcp-logging-namespace
-    namespace: kube-system
