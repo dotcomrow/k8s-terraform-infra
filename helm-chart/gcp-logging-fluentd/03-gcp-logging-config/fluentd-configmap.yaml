@@ -24,7 +24,8 @@ data:
       retry_limit 5
       auth_method json_key
       json_key /var/secrets/google/key.json
-      project_id YOUR_PROJECT_ID
+      project_id suncoast-systems-infra-0e1b
       resource_type k8s_container
       use_metadata_service false
+      zone us-east1            # Or your actual GCP zone
     </match>
