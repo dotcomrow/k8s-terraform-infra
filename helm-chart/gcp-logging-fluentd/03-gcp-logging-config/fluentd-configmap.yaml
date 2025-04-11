@@ -27,7 +27,7 @@ metadata:
 data:
   fluent.conf: |
     @include /fluentd/etc/custom-parsers.conf
-    
+
     <source>
       @type tail
       path /var/log/containers/*.log
@@ -62,15 +62,6 @@ data:
       <auth>
         json_key /var/secrets/google/key.json
       </auth>
-
-      <metadata>
-        project_id suncoast-systems-infra-0e1b
-        location us-east1
-        cluster_name suncoast-systems-k8s-cluster
-        namespace_id ${record["kubernetes"]["namespace_name"]}
-        pod_id ${record["kubernetes"]["pod_name"]}
-        container_name ${record["kubernetes"]["container_name"]}
-      </metadata>
 
       <buffer>
         flush_mode interval
