@@ -13,9 +13,15 @@ data:
       reserve_data true
       remove_key_name_field false
       <parse>
-        @type json
-        time_key ts
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        @type multi_format
+        <pattern>
+          format json
+          time_key ts
+          time_format %Y-%m-%dT%H:%M:%S.%NZ
+        </pattern>
+        <pattern>
+          format none
+        </pattern>
       </parse>
     </filter>
 ---
@@ -41,18 +47,6 @@ data:
         keep_time_key true
       </parse>
     </source>
-
-    <filter kubernetes.**>
-      @type parser
-      key_name log
-      reserve_data true
-      remove_key_name_field false
-      <parse>
-        @type json
-        time_key ts
-        time_format %Y-%m-%dT%H:%M:%S.%NZ
-      </parse>
-    </filter>
 
     <match kubernetes.**>
       @type google_cloud
