@@ -8,14 +8,15 @@ data:
     <source>
       @type tail
       path /var/log/containers/*.log
-      exclude_path /var/log/containers/*_gcp-logging-system_fluentd-*.log
       pos_file /fluentd/log/fluentd-containers.log.pos
       tag kubernetes.*
-      format json
+      read_from_head true
       <parse>
         @type json
-        time_format %Y-%m-%dT%H:%M:%S
+        time_key time
         time_type string
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+        keep_time_key true
       </parse>
     </source>
 
