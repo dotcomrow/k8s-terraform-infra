@@ -26,8 +26,13 @@ data:
     loki.source.file "pod_logs" {
       targets = discovery.relabel.pods.output
       forward_to = [loki.write.local.receiver]
+      labels = {
+        job       = "kubernetes-pod-logs",
+        namespace = "{{.namespace}}",
+        pod       = "{{.pod}}",
+      }
 
-      pipeline {
+      stages = [
         stage.labels {
           values = {
             job       = "kubernetes-pod-logs",
@@ -35,7 +40,7 @@ data:
             pod       = "{{.pod}}",
           }
         }
-      }
+      ]
     }
 
     loki.write "local" {
