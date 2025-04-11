@@ -16,27 +16,33 @@ data:
       </parse>
     </source>
 
-    <filter kubernetes.**>
-      @type record_transformer
-      enable_ruby true
-      <record>
-        log ${record["log"] ? record["log"] : record.to_s}
-      </record>
-    </filter>
-
     <match kubernetes.**>
       @type google_cloud
       detect_json false
       use_metadata_service false
+      google_application_credentials /var/secrets/google/key.json
 
       <buffer>
-        @type memory
         flush_mode interval
-        flush_interval 5s
         retry_type exponential_backoff
+        @type memory
+        flush_interval 5s
         retry_max_times 5
         chunk_limit_size 2M
         queue_limit_length 8
       </buffer>
+
+      <format>
+        @type json
+      </format>
     </match>
+
+    <filter kubernetes.**>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        log ${record["log"] ? record["log"] : record["message"] ? record["message"] : record.to_s}
+      </record>
+    </filter>
+
 
