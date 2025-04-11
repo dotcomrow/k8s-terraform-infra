@@ -16,6 +16,15 @@ data:
       </parse>
     </source>
 
+    <filter kubernetes.**>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        log ${record.has_key?("log") && record["log"] ? record["log"] : record.inspect}
+        severity ${record.has_key?("severity") && record["severity"] ? record["severity"] : "INFO"}
+      </record>
+    </filter>
+
     <match kubernetes.**>
       @type google_cloud
       detect_json false
