@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fluentd-custom-parsers
-  namespace: fluentd
+  namespace: gcp-logging-system
   labels:
     app.kubernetes.io/name: fluentd
 data:
