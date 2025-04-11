@@ -33,6 +33,14 @@ data:
         </pattern>
       </parse>
     </filter>
+
+    <filter kubernetes.**>
+      @type record_transformer
+      enable_ruby true
+      <record>
+        log ${record["log"].gsub(/\e\[[0-9;]*m/, '') if record["log"]}
+      </record>
+    </filter>
 ---
 apiVersion: v1
 kind: ConfigMap
