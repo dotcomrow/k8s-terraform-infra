@@ -17,7 +17,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: fluentd
-          image: us-docker.pkg.dev/google-samples/containers/fluentd:stable
+          image: gcr.io/stackdriver-agents/stackdriver-logging-agent:1.6.4-1.0.0
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
