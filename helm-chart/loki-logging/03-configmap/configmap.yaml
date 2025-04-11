@@ -24,13 +24,13 @@ data:
       targets    = discovery.relabel.pods.output
       forward_to = [loki.write.local.receiver]
 
-      stage.labels {
-        values = {
+      stages = [
+        stage.labels(values = {
           job       = "kubernetes-pod-logs",
           namespace = "{{.namespace}}",
           pod       = "{{.pod}}",
-        }
-      }
+        }),
+      ]
     }
 
     loki.write "local" {
