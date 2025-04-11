@@ -16,6 +16,13 @@ data:
       </parse>
     </source>
 
+    <filter kubernetes.**>
+      @type record_transformer
+      <record>
+        log ${record["log"] || record.to_s}
+      </record>
+    </filter>
+
     <match kubernetes.**>
       @type google_cloud
       detect_json false
