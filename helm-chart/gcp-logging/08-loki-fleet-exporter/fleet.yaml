@@ -3,12 +3,6 @@ defaultNamespace: kube-system
 name: 08-loki-fleet-exporter
 
 dependsOn:
-  - name: 01-gcp-logging-namespace
-    namespace: kube-system
-  - name: 02-gcp-logging-secrets
-    namespace: gcp-logging-system
-  - name: 03-gcp-logging-config
-    namespace: gcp-logging-system
   - name: 06-loki-namespace
     namespace: kube-system
   - name: 07-loki-deployment
