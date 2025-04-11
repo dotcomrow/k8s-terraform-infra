@@ -14,11 +14,23 @@ data:
       remove_key_name_field false
       <parse>
         @type multi_format
+
+        # First try parsing JSON logs
         <pattern>
           format json
           time_key ts
           time_format %Y-%m-%dT%H:%M:%S.%NZ
         </pattern>
+
+        # Fallback: try regex parsing for Kubernetes-style controller logs
+        <pattern>
+          format regexp
+          expression /^(?<level>[A-Z])(?<date>\d{4}) (?<time>\d{2}:\d{2}:\d{2}\.\d+)\s+(?<pid>\d+)\s+(?<caller>[^\]]+)] (?<message>.*)$/
+          time_key time
+          time_format %H:%M:%S.%L
+        </pattern>
+
+        # Final fallback: just treat as raw log
         <pattern>
           format none
         </pattern>
