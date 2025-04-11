@@ -13,9 +13,17 @@ data:
       read_from_head true
       <parse>
         @type none
-        unmatched_lines
       </parse>
     </source>
+
+    <filter kubernetes.**>
+      @type record_modifier
+      <record>
+        log ${message}
+        severity INFO
+      </record>
+      remove_keys message
+    </filter>
 
     <match kubernetes.**>
       @type google_cloud
@@ -30,4 +38,5 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
+
 
