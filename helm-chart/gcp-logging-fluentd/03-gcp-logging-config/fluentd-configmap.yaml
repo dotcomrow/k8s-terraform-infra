@@ -16,8 +16,9 @@ data:
       enable_ruby false
       <record>
         severity INFO
-        logging.googleapis.com/resource {"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}
-        logging.googleapis.com/labels {"source":"dummy-test"}
+        # Avoid sending logging.googleapis.com/resource directly! Do this instead:
+        resource_type global
+        labels {"env":"test"}
       </record>
     </filter>
 
@@ -26,6 +27,11 @@ data:
       detect_json false
       use_metadata_service false
       project_id suncoast-systems-infra-0e1b
+
+      # These two fields avoid triggering representable bugs
+      resource_type global
+      labels {"env":"test"}
+
       <buffer>
         flush_mode interval
         flush_interval 5s
@@ -35,5 +41,4 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
-
 
