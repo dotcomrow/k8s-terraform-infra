@@ -1,7 +1,0 @@
-# helm-chart/monitoring/grafana-k8s-monitoring-namespace/fleet.yaml
-defaultNamespace: kube-system
-name: 07-loki-deployment
-
-dependsOn:
-  - name: 06-loki-namespace
-    namespace: kube-system

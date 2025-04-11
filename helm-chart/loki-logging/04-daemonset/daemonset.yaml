@@ -3,10 +3,6 @@ kind: DaemonSet
 metadata:
   name: alloy-logs-loki
   namespace: loki-logging
-  labels:
-    app.kubernetes.io/managed-by: Helm
-    meta.helm.sh/release-name: loki-logging
-    meta.helm.sh/release-namespace: loki-logging
 spec:
   selector:
     matchLabels:
@@ -20,7 +16,9 @@ spec:
       containers:
         - name: alloy
           image: grafana/alloy:v1.7.4
-          command: [ "/bin/alloy", "run", "/etc/alloy/config.alloy" ]
+          args:
+            - "run"
+            - "/etc/alloy/config.alloy"
           env:
             - name: CLUSTER_NAME
               value: "suncoast-systems-k8s-cluster"
@@ -31,11 +29,7 @@ spec:
               mountPath: /var/log
             - name: containerd
               mountPath: /var/lib/containerd
-            - name: loki-data
-              mountPath: /loki
       volumes:
-        - name: loki-data
-          emptyDir: {}
         - name: config
           configMap:
             name: alloy-logs-loki-config

@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: loki-logging
-  labels:
-    app.kubernetes.io/managed-by: "Helm"
-  annotations:
-    meta.helm.sh/release-name: skip-helm
-    meta.helm.sh/release-namespace: kube-system

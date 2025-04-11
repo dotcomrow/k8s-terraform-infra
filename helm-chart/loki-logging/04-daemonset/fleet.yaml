@@ -1,0 +1,7 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: 04-daemonset
+spec:
+  resources:
+    - ./
