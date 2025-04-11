@@ -8,20 +8,18 @@ data:
     <source>
       @type dummy
       tag test.gcp
-      dummy {
-        "message": "Hello from Fluentd! This is a test log.",
-        "severity": "INFO",
-        "logging.googleapis.com/labels": {
-          "test_key": "test_value"
-        },
-        "logging.googleapis.com/resource": {
-          "type": "global",
-          "labels": {
-            "project_id": "suncoast-systems-infra-0e1b"
-          }
-        }
-      }
+      dummy {"log":"Hello from Fluentd!"}
     </source>
+
+    <filter test.gcp>
+      @type record_transformer
+      enable_ruby false
+      <record>
+        severity INFO
+        logging.googleapis.com/resource {"type":"global","labels":{"project_id":"suncoast-systems-infra-0e1b"}}
+        logging.googleapis.com/labels {"source":"dummy-test"}
+      </record>
+    </filter>
 
     <match test.gcp>
       @type google_cloud
@@ -37,4 +35,5 @@ data:
         queue_limit_length 8
       </buffer>
     </match>
+
 
