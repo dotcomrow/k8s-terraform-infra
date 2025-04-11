@@ -40,15 +40,16 @@ data:
       zone us-east1
       vm_id on-prem
 
-      resource {
-        type "k8s_container"
-        labels {
-          project_id "suncoast-systems-infra-0e1b"
-          location "us-east1"
-          cluster_name "suncoast-systems-k8s-cluster"
-          namespace_name "${record['kubernetes']['namespace_name']}"
-          pod_name "${record['kubernetes']['pod_name']}"
-          container_name "${record['kubernetes']['container_name']}"
-        }
-      }
+      <resource>
+        @type k8s_container
+        <labels>
+          project_id suncoast-systems-infra-0e1b
+          location us-east1
+          cluster_name suncoast-systems-k8s-cluster
+          namespace_name ${record["kubernetes"]["namespace_name"]}
+          pod_name ${record["kubernetes"]["pod_name"]}
+          container_name ${record["kubernetes"]["container_name"]}
+        </labels>
+      </resource>
     </match>
+
