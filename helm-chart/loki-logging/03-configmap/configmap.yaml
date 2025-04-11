@@ -25,14 +25,9 @@ data:
       forward_to = [loki.write.local.receiver]
 
       stages = [
-        stage.labels {
-          values = {
-            job       = "kubernetes-pod-logs"
-            namespace = "{{.namespace}}"
-            pod       = "{{.pod}}"
-          }
-        }
+        stage.labels(values = { job = "kubernetes-pod-logs", namespace = "{{.namespace}}", pod = "{{.pod}}" }),
       ]
+
     }
 
     loki.write "local" {
