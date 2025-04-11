@@ -17,20 +17,21 @@ spec:
       serviceAccountName: default
       containers:
         - name: fluentd
-          image: gcr.io/stackdriver-agents/stackdriver-logging-agent:1.6.4-1.0.0
+          image: ghcr.io/dotcomrow/fluentd-gcp:latest   # <-- ✅ Use your GHCR image
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
           volumeMounts:
-            - name: config-volume
-              mountPath: /fluentd/etc
+            - name: fluentd-config
+              mountPath: /fluentd/etc/fluent.conf
+              subPath: fluent.conf                    # <-- ✅ Mount only the config file
             - name: varlog
               mountPath: /var/log
             - name: gcp-creds
               mountPath: /var/secrets/google
               readOnly: true
       volumes:
-        - name: config-volume
+        - name: fluentd-config
           configMap:
             name: fluentd-config
         - name: varlog
