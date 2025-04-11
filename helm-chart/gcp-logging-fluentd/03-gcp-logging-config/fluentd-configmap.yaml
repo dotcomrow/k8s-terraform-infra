@@ -16,11 +16,12 @@ data:
       </parse>
     </source>
 
-    <filter **>
+    <filter kubernetes.**>
       @type record_transformer
       enable_ruby true
       <record>
-        log ${record["message"] || record["log"] || record.to_s}
+        log ${record["log"] || record["message"] || record.to_s}
+        severity ${record["severity"] || "INFO"}
       </record>
     </filter>
 
