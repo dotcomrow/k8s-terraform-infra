@@ -27,9 +27,11 @@ data:
         Keep_Log      Off
 
     [OUTPUT]
-        Name          stackdriver
-        Match         kube.*
-        Resource      k8s_container
+        Name stackdriver
+        Match kube.*
+        Resource k8s_container
+        k8s_cluster_name suncoast_systems_k8s_cluster
+        k8s_cluster_location us-east1
         google_service_credentials /var/secrets/google/credentials.json
         Workers       1
 
