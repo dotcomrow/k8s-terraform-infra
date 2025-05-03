@@ -8,6 +8,11 @@ resource "google_project" "infra" {
   org_id     = var.gcp_org_id
 }
 
+resource "google_project_billing_info" "billing" {
+  project_id        = google_project.infra.project_id
+  billing_account   = var.billing_account_id
+}
+
 resource "google_project_service" "logging" {
   project = google_project.infra.project_id
   service = "logging.googleapis.com"
