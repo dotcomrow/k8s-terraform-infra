@@ -13,7 +13,6 @@ resource "google_storage_bucket" "free_tier_safe_bucket" {
   storage_class = "STANDARD"
 
   uniform_bucket_level_access = true
-  public_access_prevention    = "enforced"
 
   lifecycle_rule {
     action {
