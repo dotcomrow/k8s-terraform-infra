@@ -6,11 +6,7 @@ resource "google_project" "infra" {
   name       = "Suncoast Systems Infra"
   project_id = "suncoast-systems-infra-${random_id.suffix_gcp.hex}"
   org_id     = var.gcp_org_id
-}
-
-resource "google_project_billing_info" "billing" {
-  project_id        = google_project.infra.project_id
-  billing_account   = var.billing_account_id
+  billing_account = "${var.billing_account}"
 }
 
 resource "google_project_service" "logging" {
