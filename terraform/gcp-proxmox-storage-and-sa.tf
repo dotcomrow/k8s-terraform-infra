@@ -2,6 +2,7 @@
 resource "google_service_account" "gcsfuse" {
   account_id   = "gcsfuse-mount"
   display_name = "GCS Fuse Mount Service Account"
+  project      = google_project.infra.project_id
 }
 
 resource "google_storage_bucket" "free_tier_safe_bucket" {
