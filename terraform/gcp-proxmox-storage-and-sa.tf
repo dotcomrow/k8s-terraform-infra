@@ -4,11 +4,6 @@ resource "google_service_account" "gcsfuse" {
   display_name = "GCS Fuse Mount Service Account"
 }
 
-provider "google" {
-  project = google_project.infra.project_id
-  region  = var.region
-}
-
 resource "google_storage_bucket" "free_tier_safe_bucket" {
   name     = var.bucket_name
   location = var.region
